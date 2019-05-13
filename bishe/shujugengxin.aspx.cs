@@ -135,7 +135,7 @@ namespace bishe
                     dateTimes.Add(DateTime.Now.Date.AddDays(-i));
                 }
                 var index = dateTimes.Count % 7 == 0 ? dateTimes.Count / 7 : dateTimes.Count / 7 + 1;
-               
+                var dkxqDatas = new List<dakaxiangqings>();
                 for (int i = 0; i < userList.Count; i++)
                 {
                     var datas = new List<dakaxiangqings>();
@@ -163,19 +163,20 @@ namespace bishe
                             {
                                 dk.基准时间 = StringToDateTime(result.baseCheckTime.ToString()).AddHours(8);
                             }
-                            db.dakaxiangqing.Add(dk);
+                            dkxqDatas.Add(dk);
                         }
                       
                     }
                 }
-            
-                if (db.SaveChanges() > 0)
+                db.BulkInsert(dkxqDatas);
+                try
                 {
+                    db.SaveChanges();
                     Response.Write("<script>if(confirm('全部更新完成')){window.location='/xuanze.aspx'} else{window.location='/xuanze.aspx'}</script>");
                 }
-                else
+                catch (Exception ex)
                 {
-                    var redirect = "<script>if(confirm('暂时没有更新项，是否重新更新 ')){window.location='/xuanze.aspx'} else " +
+                    var redirect = "<script>if(confirm('暂时没有更新项，是否重新更新 '  " + $"或者错误信息{ex.Message}" + "))){window.location='/xuanze.aspx'} else " +
 "{window.location='/shujugengxin.aspx'}</script>";
                     Response.Write(redirect);
                 }

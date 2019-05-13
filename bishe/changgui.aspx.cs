@@ -91,7 +91,7 @@ namespace bishe
                     sqlDataAdapter.Fill(ds, "yuanshijilu");
                     GridView_Shijiantongji.DataSource = ds;
                     GridView_Shijiantongji.DataBind();
-                tongji.Text = $"{TextBox_banji.Text}班级,考勤时间从{TextBox_Kaishishijian.Text}-{TextBox_Jieshushijian.Text}的正常出勤人数一共{count}人次";
+                tongji.Text = $"正常出勤人数一共{count}人次";
             }
         }
         //迟到
@@ -129,7 +129,7 @@ namespace bishe
                     sqlDataAdapter.Fill(ds, "yuanshijilu");
                     GridView_Shijiantongji.DataSource = ds;
                     GridView_Shijiantongji.DataBind();
-                tongji.Text = $"{TextBox_banji.Text}班级,考勤时间从{TextBox_Kaishishijian.Text}-{TextBox_Jieshushijian.Text}的迟到人数一共{count}人次";
+                tongji.Text = $"迟到人数一共{count}人次";
             }
         }
         //早退
@@ -170,7 +170,7 @@ namespace bishe
                     sqlDataAdapter.Fill(ds, "yuanshijilu");
                     GridView_Shijiantongji.DataSource = ds;
                     GridView_Shijiantongji.DataBind();
-                tongji.Text = $"{TextBox_banji.Text}班级,考勤时间从{TextBox_Kaishishijian.Text}-{TextBox_Jieshushijian.Text}的早退人数一共{count}人次";
+                tongji.Text = $"早退人数一共{count}人次";
             }
         }
         //请假
@@ -208,7 +208,7 @@ namespace bishe
                     sqlDataAdapter.Fill(ds, "yuanshijilu");
                     GridView_Shijiantongji.DataSource = ds;
                     GridView_Shijiantongji.DataBind();
-                tongji.Text = $"{TextBox_banji.Text}班级,考勤时间从{TextBox_Kaishishijian.Text}-{TextBox_Jieshushijian.Text}的请假人数一共{count}人次";
+                tongji.Text = $"请假人数一共{count}人次";
             }
         }
         //缺课
@@ -257,7 +257,7 @@ namespace bishe
                     sqlDataAdapter.Fill(ds, "yuanshijilu");
                     GridView_Shijiantongji.DataSource = ds;
                     GridView_Shijiantongji.DataBind();
-                tongji.Text = $"{TextBox_banji.Text}班级,考勤时间从{TextBox_Kaishishijian.Text}-{TextBox_Jieshushijian.Text}的缺课人数一共{count}人次";
+                tongji.Text = $"缺课人数一共{count}人次";
             }
         }
         //旷课
@@ -308,7 +308,7 @@ namespace bishe
                     sqlDataAdapter.Fill(ds, "yuanshijilus");
                     GridView_Shijiantongji.DataSource = ds;
                     GridView_Shijiantongji.DataBind();
-                tongji.Text = $"{TextBox_banji.Text}班级,考勤时间从{TextBox_Kaishishijian.Text}-{TextBox_Jieshushijian.Text}的缺课人数一共{count}人次";
+                tongji.Text = $"缺课人数一共{count}人次";
             }
         }
 
