@@ -30,11 +30,14 @@
             Font-weight: Bold;
             table-layout:fixed;
         }
+         body {
+            background: url(/b.jpg)
+        }
     </style>
 </head>
-<body>
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">
     <form id="form_Xuehaotongji" runat="server">
-        <div style="text-align:center;background:url(222.jpg) no-repeat;height:650px;width:1120px;">         
+        <div style="text-align:center;height:650px;width:1120px;">         
             <asp:Label ID="Label_Xuehao" runat="server" Text="请 输 入 学 号" CssClass="Label1"></asp:Label>    
         <br />
         <br />
