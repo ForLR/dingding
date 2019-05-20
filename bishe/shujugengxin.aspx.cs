@@ -124,6 +124,7 @@ namespace bishe
            
             using (MySqlDBContext db = new MySqlDBContext())
             {
+                db.Database.ExecuteSqlCommand("TRUNCATE TABLE dakaxiangqings");
                 var userList = db.user.Where(x => x.getdata == 1).ToList();
 
                 var updateTime = db.dakaxiangqing.Any() ? Convert.ToDateTime(db.dakaxiangqing.Max(x => x.打卡时间)).Date : new DateTime(2019, 2, 25);
