@@ -24,11 +24,14 @@
             Font-weight: Bold;
             table-layout:fixed;
         }
+          body {
+            background: url(/b.jpg)
+        }
     </style>
 </head>
-<body>  
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">  
     <form id="form_Paihangbang" runat="server">
-        <div style="text-align:center;background:url(222.jpg) no-repeat;height:650px;width:1120px;">   
+        <div style="text-align:center;height:650px;width:1120px;">   
              <br />
             <asp:Button ID="Button_Fanhui" runat="server" Text="返回" CssClass="Button" OnClick="Button_Fanhui_Click" />
         <br />

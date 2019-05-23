@@ -140,6 +140,18 @@ namespace bishe
                  $"LEFT join qingjias as q on  u.user_id=y.user_id where y.打卡结果='未打卡' {where} AND " +
                  $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期) > 1) as d ";
 
+                    var ccsql = "SELECT count(*) from ( SELECT d.抽查开始时间,d.抽查结束时间, CASE  WHEN ( SELECT count( * )  FROM qingjias AS q LEFT join users as u on u.user_id=q.user_id" +
+                     "  WHERE DATE_FORMAT( q.`开始时间`, '%Y-%m-%d %H:%i:%s' ) <= d.`抽查开始时间` AND DATE_FORMAT( q.`结束时间`, '%Y-%m-%d %H:%i:%s' ) >= d.`抽查结束时间` " +
+                     $" AND u.pass_word ='{item.user_id}' ) > 0 THEN '请假' else d.打卡时间 END as 打卡时间 ," +
+                      $"( SELECT msg FROM remark as r LEFT join users as u on r.user_id=u.user_id " +
+                     $"WHERE u.pass_word ='{item.user_id}' AND start_time = d.抽查开始时间 AND end_time = d.抽查结束时间 ) AS 备注" +
+                     $" from " +
+                     "(SELECT 抽查开始时间,抽查结束时间, (SELECT CASE  WHEN  min(打卡时间) is NULL THEN '无打卡' ELSE " +
+                     "min(打卡时间) END as 打卡时间 FROM dakaxiangqings as d left join users as u  on d.userId = u.user_id " +
+                     $"WHERE d.打卡时间 >= c.`抽查开始时间` and d.打卡时间 <= c.`抽查结束时间` AND u.pass_word ='{ item.user_id}') as 打卡时间" +
+
+                     $" from choucha as c) as d ) as  e where e.`抽查开始时间`>='{startTime}' and e.`抽查结束时间`<='{endTime}' and e.`打卡时间`!=''";
+
                     var msg = new tongjiModel
                     {
                         msgtype = "oa",
@@ -162,7 +174,8 @@ namespace bishe
                                 new Form { key="早退.........",value=$"{SqlHelper.ExecuteScalar(ztSql)}次"},
                                 new Form { key="请假.........",value=$"{SqlHelper.ExecuteScalar(qjSql)}次"},
                                 new Form { key="旷工.........",value=$"{SqlHelper.ExecuteScalar(kkSql)}次"},
-                                new Form { key="缺卡.........",value=$"{SqlHelper.ExecuteScalar(qkSql)}次"}
+                                new Form { key="缺卡.........",value=$"{SqlHelper.ExecuteScalar(qkSql)}次"},
+                                 new Form { key="抽查.........",value=$"{SqlHelper.ExecuteScalar(ccsql)}次"}
                             }
                             }
                         }

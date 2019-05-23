@@ -14,9 +14,12 @@
             Font-Size: Large;
             Font-weight: Bold;
         }
+          body {
+            background: url(/b.jpg)
+        }
     </style>
 </head>
-<body>  
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">  
     <form id="form_Qushifenxi" runat="server">
     <div style="text-align:center;">   
         <br />

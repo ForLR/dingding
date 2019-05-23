@@ -15,11 +15,14 @@
             Font-Size: X-Large;
             Font-weight: Bold;
         }
+            body {
+            background: url(/b.jpg)
+        }
     </style>
 </head>
-<body>
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">
     <form id="form_Shujigengxin" runat="server">
-    <div style="text-align:center;background:url(222.jpg) no-repeat;height:650px;width:1120px;">  
+    <div style="text-align:center;height:650px;width:1120px;">  
         <asp:Label ID="Label_Xuanzefangshi" runat="server"  Text="请选择更新方式" CssClass="Label1"></asp:Label>
         <br />
         <br />

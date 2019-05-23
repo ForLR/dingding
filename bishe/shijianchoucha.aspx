@@ -31,14 +31,17 @@
             Font-weight: Bold;
             table-layout:fixed;
         }
+            body {
+            background: url(/b.jpg)
+        }
     </style>
 </head>
-<body>  
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">  
 
 
 
     <form id="form1" runat="server">
-        <div style="text-align:center;background:url(222.jpg) no-repeat;height:650px;width:1120px;"> 
+        <div style="text-align:center;height:650px;width:1120px;"> 
             <asp:Label ID="Label_Xuanzeshijian" runat="server" Text="请选择抽查时间" CssClass="Label"></asp:Label>
         <br />
         <br />

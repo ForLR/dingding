@@ -77,7 +77,7 @@ namespace bishe
                 where += $" and u.class_grade='{TextBox_banji.Text}'";
             }
             var sql = $"SELECT u.user_name as 名字,y.考勤时间,y.打卡时间,y.打卡结果 from yuanshijilus  as y " +
-                $"left join users as u on u.user_id = y.user_id where  y.打卡结果='正常'  {where}";
+                $"left join users as u on u.user_id = y.user_id where  y.打卡结果='正常'  {where} ORDER BY y.打卡时间 desc";
             var countSql = $"SELECT count(1) from yuanshijilus  as y " +
                 $"left join users as u on u.user_id = y.user_id where  y.打卡结果='正常'  {where}";
             var count = SqlHelper.ExecuteScalar(countSql);
@@ -115,7 +115,7 @@ namespace bishe
                 where += $" and u.class_grade='{TextBox_banji.Text}'";
             }
             var sql = $"SELECT  u.user_name as 名字,y.考勤时间,y.打卡时间,y.打卡结果 from yuanshijilus  as y " +
-                $"left join users as u on u.user_id = y.user_id where  y.打卡结果='迟到' {where}";
+                $"left join users as u on u.user_id = y.user_id where  y.打卡结果='迟到' {where} ORDER BY y.打卡时间 desc";
             var countSql = $"SELECT count(1) from yuanshijilus  as y " +
                 $"left join users as u on u.user_id = y.user_id where  y.打卡结果='迟到' {where}";
             var count = SqlHelper.ExecuteScalar(countSql);
@@ -155,7 +155,7 @@ namespace bishe
 
             var sql = $"SELECT  u.user_name as 名字,y.考勤时间,y.打卡时间,y.打卡结果 from yuanshijilus  as y " +
                 $"left join users as u on u.user_id = y.user_id where " +
-                $" y.打卡结果='早退' {where}";
+                $" y.打卡结果='早退' {where} ORDER BY y.打卡时间 desc";
             var countSql = $"SELECT count(1) from yuanshijilus  as y " +
               $"left join users as u on u.user_id = y.user_id where " +
               $" y.打卡结果='早退' {where}";
@@ -195,7 +195,7 @@ namespace bishe
                 where += $" and u.class_grade='{TextBox_banji.Text}'";
             }
             var sql = $" SELECT u.user_name as 名字, q.`开始时间`, q.`结束时间`,q.`请假类型`  from qingjias as q left join users u" +
-                $" on q.user_id = u.user_id where 1=1 {where}";
+                $" on q.user_id = u.user_id where 1=1 {where}  ORDER BY q.`开始时间` desc";
             var countSql = $" SELECT  count(1)  from qingjias as q left join users u" +
                 $" on q.user_id = u.user_id where 1=1 {where}";
             var count = SqlHelper.ExecuteScalar(countSql);
@@ -237,7 +237,7 @@ namespace bishe
                  $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡' {where}  AND  y.id not in (SELECT  y.id from yuanshijilus  " +
                  $"as y left join users as u on u.user_id = y.user_id " +
                  $"LEFT join qingjias as q on  u.user_id=y.user_id where y.打卡结果='未打卡' {where} AND " +
-                 $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期)= 1 ";
+                 $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期)= 1  ORDER BY a.时间 desc";
 
 
             var countSql = "select count(1) from ( SELECT a.名字,  a.时间  as 缺卡时间 from( SELECT  DATE_FORMAT( y.`考勤时间`, '%Y-%m-%d %H:%i' ) AS 时间," +
@@ -287,7 +287,7 @@ namespace bishe
                  $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡' {where}  AND  y.id not in (SELECT  y.id from yuanshijilus  " +
                  $"as y left join users as u on u.user_id = y.user_id " +
                  $"LEFT join qingjias as q on  u.user_id=y.user_id where y.打卡结果='未打卡' {where} AND " +
-                 $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期) > 1 ";
+                 $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期) > 1 ORDER BY a.时间 desc";
 
 
             var countSql = "select count(1) from ( SELECT a.名字, CASE  WHEN a.时间 > DATE_FORMAT(a.时间, '%Y-%m-%d 12:00') THEN DATE_FORMAT(a.时间, '%Y-%m-%d 下午') " +

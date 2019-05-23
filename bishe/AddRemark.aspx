@@ -9,9 +9,12 @@
     <style type="text/css">
         .Textbox {}
         .Button {}
+          body {
+            background: url(/b.jpg)
+        }
     </style>
 </head>
-<body>
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;"> 
     <form id="form1" runat="server">
         <div>
         </div>

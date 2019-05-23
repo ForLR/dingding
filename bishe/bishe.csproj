@@ -127,7 +127,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="a.jpg" />
     <Content Include="AddRemark.aspx" />
+    <Content Include="b.jpg" />
     <Content Include="chouchaqingkuang.aspx" />
     <Content Include="chouchaqushi.aspx" />
     <Content Include="kuozhanfenxi.aspx" />

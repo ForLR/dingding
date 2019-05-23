@@ -6,8 +6,13 @@
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>钉钉考勤管理系统</title>
+    <style>
+         body {
+            background: url(/b.jpg)
+        }
+    </style>
 </head>  
-<body>  
+<body style=" background-repeat:no-repeat ; background-size:100% 100%; background-attachment: fixed;">  
     <form id="form_Daohang" runat="server" >
         <div id="Daohang" style="border-right-style:solid; border-right-color:Silver; top:40px;  width: 240px; height:560px;position:fixed; text-align:center">
             <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" StartingNodeUrl="~/login.aspx" />
