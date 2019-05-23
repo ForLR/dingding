@@ -234,18 +234,16 @@ namespace bishe
             }
             var sql = " SELECT a.名字, a.时间  as 缺卡时间 from( SELECT  DATE_FORMAT( y.`考勤时间`, '%Y-%m-%d %H:%i' ) AS 时间," +
                 " u.user_name AS 名字,CASE WHEN y.`考勤时间` > DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 13:00') THEN DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 18:00') ELSE DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 12:00' ) END AS 日期 from yuanshijilus as y " +
-                 $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡' {where}  AND  y.id not in (SELECT  y.id from yuanshijilus  " +
-                 $"as y left join users as u on u.user_id = y.user_id " +
-                 $"LEFT join qingjias as q on  u.user_id=y.user_id where y.打卡结果='未打卡' {where} AND " +
-                 $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期)= 1 ";
+                 $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡' {where}   AND  y.id not in (SELECT DISTINCT y.id from qingjias as q   " +
+                 $" LEFT JOIN yuanshijilus AS y ON q.user_id = y.user_id  LEFT JOIN users AS u ON u.user_id = y.user_id WHERE y.打卡结果 = '未打卡' {where} AND y.`打卡时间` BETWEEN q.`开始时间` AND q.`结束时间`) GROUP BY y.id" +
+                 $") as a GROUP BY a.名字,a.日期 HAVING count(a.日期)= 1 ";
 
 
-            var countSql = "select count(1) from ( SELECT a.名字,  a.时间  as 缺卡时间 from( SELECT  DATE_FORMAT( y.`考勤时间`, '%Y-%m-%d %H:%i' ) AS 时间," +
-                 " u.user_name AS 名字,CASE WHEN y.`考勤时间` > DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 13:00') THEN DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 18:00') ELSE DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 12:00' ) END AS 日期 from yuanshijilus as y " +
-                  $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡' {where}  AND  y.id not in (SELECT  y.id from yuanshijilus  " +
-                  $"as y left join users as u on u.user_id = y.user_id " +
-                  $"LEFT join qingjias as q on  u.user_id=y.user_id where y.打卡结果='未打卡' {where} AND " +
-                  $" y.`打卡时间`  BETWEEN q.`开始时间` and q.`结束时间`) " + $" GROUP BY y.id) as a GROUP BY a.名字,a.日期 HAVING count(a.日期)=1) as d ";
+            var countSql = "select count(1) from (  SELECT a.名字, a.时间  as 缺卡时间 from( SELECT  DATE_FORMAT( y.`考勤时间`, '%Y-%m-%d %H:%i' ) AS 时间," +
+                " u.user_name AS 名字,CASE WHEN y.`考勤时间` > DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 13:00') THEN DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 18:00') ELSE DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 12:00' ) END AS 日期 from yuanshijilus as y " +
+                 $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡' {where}   AND  y.id not in (SELECT DISTINCT y.id from qingjias as q   " +
+                 $" LEFT JOIN yuanshijilus AS y ON q.user_id = y.user_id  LEFT JOIN users AS u ON u.user_id = y.user_id WHERE y.打卡结果 = '未打卡' {where} AND y.`打卡时间` BETWEEN q.`开始时间` AND q.`结束时间`) GROUP BY y.id" +
+                 $") as a GROUP BY a.名字,a.日期 HAVING count(a.日期)= 1) as d ";
             var count = SqlHelper.ExecuteScalar(countSql);
 
             using (MySqlConnection sqlConnection = new MySqlConnection(SqlHelper.connStr))
