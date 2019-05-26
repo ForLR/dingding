@@ -25,7 +25,7 @@ namespace bishe
 
           
 
-            var cmdString = "SELECT DATE_FORMAT(考勤时间,'%u')-7 周 ,count(id) 次数 from ( select y.*  from yuanshijilus  as y " +
+            var cmdString = "SELECT DATE_FORMAT(考勤时间,'%u')-7 周 ,count(id) 次数 from ( select any_value(y.id) as id,any_value(y.user_id),any_value(y.`打卡结果`),any_value(y.`考勤日期`) as 考勤日期,any_value(y.`考勤时间`) as 考勤时间  from yuanshijilus  as y " +
                 " LEFT join users as u on u.user_id = y.user_id where y.打卡结果 = '正常' " +
                 "group by y.考勤日期,y.user_id  HAVING count(y.id) = 4 ) as d GROUP BY 周";
 

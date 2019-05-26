@@ -31,11 +31,11 @@ namespace bishe
             MySqlConnection sqlConnection = new MySqlConnection(sqlString);
             sqlConnection.Open();
 
-            var cmdString = "SELECT b.名字,count(b.名字) as 次数 from ( " +
-                " SELECT a.名字, a.时间 from( " +
-               "SELECT DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d %H:%i') as 时间, u.user_name as 名字,  CASE  WHEN " +
-               " y.`考勤时间`> DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 13:00') THEN  DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 18:00') " +
-               "ELSE  DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 12:00')  END as 日期 from yuanshijilus  as y " +
+            var cmdString = "SELECT  b.名字 as 名字,count(b.名字) as 次数 from ( " +
+                " SELECT any_value(a.名字) as 名字, any_value(a.时间) from( " +
+               "SELECT DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d %H:%i') as 时间, any_value(u.user_name) as 名字,  CASE  WHEN " +
+               " any_value(y.`考勤时间`)> DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d 13:00') THEN  DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d 18:00') " +
+               "ELSE  DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d 12:00')  END as 日期 from yuanshijilus  as y " +
                "RIGHT join users as u on u.user_id = y.user_id " +
               $" WHERE y.`打卡结果`= '正常') as a GROUP BY a.名字,a.日期 HAVING count(a.日期) > 1 ) as b GROUP BY b.名字  ORDER BY 次数 desc ";
         
@@ -109,10 +109,10 @@ namespace bishe
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlString);
             sqlConnection.Open();
-            var nsql = " SELECT a.名字, a.时间,CASE WHEN a.时间 > DATE_FORMAT(a.时间, '%Y-%m-%d 13:00') THEN " +
-                "DATE_FORMAT(a.时间, '%Y-%m-%d 18:00') ELSE DATE_FORMAT(a.时间, '%Y-%m-%d 12:00' )  " +
-                "END AS 日期 from( SELECT  DATE_FORMAT( y.`考勤时间`, '%Y-%m-%d %H:%i' ) AS 时间," +
-                " u.user_name AS 名字,CASE WHEN y.`考勤时间` > DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 13:00') THEN DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 18:00') ELSE DATE_FORMAT(y.`考勤时间`, '%Y-%m-%d 12:00' ) END AS 日期 from yuanshijilus as y " +
+            var nsql = " SELECT a.名字, a.时间,CASE WHEN a.时间 > DATE_FORMAT(any_value(a.时间), '%Y-%m-%d 13:00') THEN " +
+                "DATE_FORMAT(any_value(a.时间), '%Y-%m-%d 18:00') ELSE DATE_FORMAT(any_value(a.时间), '%Y-%m-%d 12:00' )  " +
+                "END AS 日期 from( SELECT  DATE_FORMAT( any_value(y.`考勤时间`), '%Y-%m-%d %H:%i' ) AS 时间," +
+                " any_value(u.user_name) AS 名字,CASE WHEN any_value(y.`考勤时间`) > DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d 13:00') THEN DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d 18:00') ELSE DATE_FORMAT(any_value(y.`考勤时间`), '%Y-%m-%d 12:00' ) END AS 日期 from yuanshijilus as y " +
                  $"left join users as u on u.user_id = y.user_id where y.打卡结果='未打卡'  AND  y.id not in (SELECT  y.id from yuanshijilus  " +
                  $"as y left join users as u on u.user_id = y.user_id " +
                  $"LEFT join qingjias as q on  u.user_id=y.user_id where y.打卡结果='未打卡'  AND " +
