@@ -138,11 +138,11 @@ namespace bishe
             var where = "";
             if (!string.IsNullOrWhiteSpace(TextBox_Kaishishijian.Text))
             {
-                where += $"  y.考勤时间 >='{TextBox_Kaishishijian.Text } '";
+                where += $" and y.考勤时间 >='{TextBox_Kaishishijian.Text } '";
             }
             if (!string.IsNullOrWhiteSpace(TextBox_Jieshushijian.Text))
             {
-                where += $" and y.考勤时间 <='{ TextBox_Jieshushijian.Text + " 23:59:59"}";
+                where += $" and y.考勤时间 <='{ TextBox_Jieshushijian.Text + " 23:59:59"}'";
             }
             if (!string.IsNullOrWhiteSpace(TextBox_Xuehao.Text))
             {
