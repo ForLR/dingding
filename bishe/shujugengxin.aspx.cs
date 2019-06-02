@@ -85,6 +85,7 @@ namespace bishe
                 var chaxuntime = stoptime.ElapsedMilliseconds;
                 stoptime.Restart();
                 db.BulkInsert(datas);
+                //db.yuanshijilu.AddRange(datas);
                 try
                 {
                     db.SaveChanges();
