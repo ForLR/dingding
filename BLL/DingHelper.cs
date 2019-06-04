@@ -25,6 +25,15 @@ namespace BLL
             }
         }
         /// <summary>
+        /// 获取所有部门信息
+        /// </summary>
+        /// <returns></returns>
+        public dynamic GetDepartment()
+        {
+            var response = HttpHelper.HttpGet($"https://oapi.dingtalk.com/department/list?access_token={_accessToken}");
+            return JsonHelper.DeserializeJsonToObject<dynamic>(response).department;
+        }
+        /// <summary>
         /// 部门id获取所有用户的id
         /// </summary>
         /// <param name="deptId"></param>

@@ -122,8 +122,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Z.EntityFramework.Extensions, Version=3.18.5.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
-      <HintPath>..\packages\Z.EntityFramework.Extensions.3.18.5\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
+    <Reference Include="Z.EntityFramework.Extensions, Version=3.18.6.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Extensions.3.18.6\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +141,7 @@
     <Content Include="pingfenbangdan.aspx" />
     <Content Include="qushifenxi.aspx" />
     <Content Include="shijianchoucha.aspx" />
+    <Content Include="UserManage.aspx" />
     <Content Include="xuehaochoucha.aspx" />
     <Content Include="db.config" />
     <None Include="Properties\PublishProfiles\bishe.pubxml" />
@@ -153,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bufengengxin.aspx" />
-    <Content Include="Daohang.aspx" />
     <Content Include="login.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -192,13 +192,6 @@
     </Compile>
     <Compile Include="chouchaqushi.aspx.designer.cs">
       <DependentUpon>chouchaqushi.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Daohang.aspx.cs">
-      <DependentUpon>Daohang.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Daohang.aspx.designer.cs">
-      <DependentUpon>Daohang.aspx</DependentUpon>
     </Compile>
     <Compile Include="kuozhanfenxi.aspx.cs">
       <DependentUpon>kuozhanfenxi.aspx</DependentUpon>
@@ -256,6 +249,13 @@
     </Compile>
     <Compile Include="shujugengxin.aspx.designer.cs">
       <DependentUpon>shujugengxin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserManage.aspx.cs">
+      <DependentUpon>UserManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserManage.aspx.designer.cs">
+      <DependentUpon>UserManage.aspx</DependentUpon>
     </Compile>
     <Compile Include="xuanze.aspx.cs">
       <DependentUpon>xuanze.aspx</DependentUpon>

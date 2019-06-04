@@ -20,6 +20,7 @@ namespace Dal
         public DbSet<User> user { get; set; }
         public DbSet<yuanshijilu> yuanshijilu { get; set; }
         public DbSet<qingjia> qingjia { get; set; }
+        public DbSet<department> department { get; set; }
 
         public DbSet<dakaxiangqings> dakaxiangqing { get; set; }
         public static DbConnection GetConnection()

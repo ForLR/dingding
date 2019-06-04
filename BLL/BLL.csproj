@@ -58,6 +58,7 @@
     <Compile Include="HttpHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Model\choucha.cs" />
+    <Compile Include="Model\department.cs" />
     <Compile Include="Model\dingding\Attendance.cs" />
     <Compile Include="Model\dakaxiangqings.cs" />
     <Compile Include="Model\dingding\ProcessInstanceResult.cs" />

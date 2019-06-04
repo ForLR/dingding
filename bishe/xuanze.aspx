@@ -55,6 +55,11 @@
          <br />
         <br />
         <br />
+         <asp:Button ID="Button_user" runat="server" Text="用户管理" CssClass="Button" OnClick="Button_user_Click"/>
+       
+         <br />
+        <br />
+        <br />
         <asp:Button ID="Button_Zhuxiao" runat="server" Text="注销" CssClass="Button" OnClick="Button_Zhuxiao_Click"/>
     </div>
     </form>

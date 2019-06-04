@@ -317,5 +317,36 @@ namespace bishe
             }
             return result;
         }
+
+        protected void Button_department_Click(object sender, EventArgs e)
+        {
+           
+            using (MySqlDBContext db = new MySqlDBContext())
+            {
+                db.Database.ExecuteSqlCommand("TRUNCATE TABLE departments");
+                var data= dd.GetDepartment();
+                List<department> departmentData = new List<department>();
+                foreach (var item in data)
+                {
+                    departmentData.Add(new department
+                    {
+                        departmentId=item.id,
+                        name=item.name
+                    });
+                }
+                db.department.AddRange(departmentData);
+                if (db.SaveChanges() > 0)
+                {
+                    Response.Write("<script>if(confirm('部门数据更新完成')){window.location='/xuanze.aspx'} else{window.location='/xuanze.aspx'}</script>");
+                }
+                else
+                {
+                    var redirect = "<script>if(confirm('暂时没有更新项，是否重新更新 ')){window.location='/xuanze.aspx'} else " +
+"{window.location='/shujugengxin.aspx'}</script>";
+                    Response.Write(redirect);
+                }
+            }
+
+        }
     }
 }

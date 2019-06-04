@@ -193,5 +193,10 @@ namespace bishe
                 }
             }
         }
+
+        protected void Button_user_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserManage.aspx");
+        }
     }
 }

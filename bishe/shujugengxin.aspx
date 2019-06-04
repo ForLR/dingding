@@ -42,6 +42,10 @@
        <asp:Button ID="Button_qingjia" runat="server" CssClass="Button" OnClick="Button_qingjia_Click" Text="请假数据更新" Width="360px" />  
         <br />
         <br />
+       <asp:Button ID="Button_department" runat="server" CssClass="Button" OnClick="Button_department_Click" Text="部门信息更新" Width="360px" />  
+       
+        <br />
+        <br />
         <asp:Button ID="Button_Fanhui" runat="server" CssClass="Button"  OnClick="Button_Fanhui_Click" Text="返回"  />
     </div>
     </form>
