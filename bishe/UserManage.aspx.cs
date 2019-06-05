@@ -15,7 +15,6 @@ namespace bishe
 {
     public partial class UserManage : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             // 如果未经过登录界面登录而直接输入此页面地址，返回登录页面
@@ -23,6 +22,7 @@ namespace bishe
             {
                 Response.Redirect("login.aspx");
             }
+         
             string cmdString = "SELECT  departmentId as 部门id, name as 部门名字  FROM departments ORDER BY id;";
 
             string sqlString = ConfigurationManager.AppSettings["ConnectionString"];
@@ -64,11 +64,17 @@ namespace bishe
             if (string.IsNullOrWhiteSpace(NameValue.Text)|| string.IsNullOrWhiteSpace(Idvalue.Text))
             {
                 Response.Write("<script>alert('请先选择操作的对象')</script>");
+                return;
             }
             using (MySqlDBContext db = new MySqlDBContext())
             {
                 DingHelper dd = new DingHelper();
                 var users = dd.GetUserIds(Idvalue.Text);
+                if (users==null)
+                {
+                    Response.Write("<script>alert('部门下不存在数据')</script>");
+                    return;
+                }
                 var sql = $"DELETE from users where user_id in(select user_id from(SELECT  * from  users where class_grade = '{NameValue.Text}')t)";
                 db.Database.ExecuteSqlCommand(sql);
                 var userList = new List<User>();
@@ -106,11 +112,17 @@ namespace bishe
             if (string.IsNullOrWhiteSpace(NameValue.Text) || string.IsNullOrWhiteSpace(Idvalue.Text))
             {
                 Response.Write("<script>alert('请先选择操作的对象')</script>");
+                return;
             }
             using (MySqlDBContext db = new MySqlDBContext())
             {
                 DingHelper dd = new DingHelper();
                 var users = dd.GetUserIds(Idvalue.Text);
+                if (users == null)
+                {
+                    Response.Write("<script>alert('部门下不存在数据')</script>");
+                    return;
+                }
                 var sql = $"DELETE from users where user_id in(select user_id from(SELECT  * from  users where class_grade = '{NameValue.Text}')t)";
                 db.Database.ExecuteSqlCommand(sql);
                 var userList = new List<User>();
@@ -147,6 +159,22 @@ namespace bishe
 
         }
 
-       
+        protected void Button_delete_Click(object sender, EventArgs e)
+        {
+            using (MySqlDBContext db = new MySqlDBContext())
+            {
+                var sql = $"DELETE from users where user_id in(select user_id from(SELECT  * from  users where class_grade = '{NameValue.Text}')t)";
+               
+                if (db.Database.ExecuteSqlCommand(sql) > 0)
+                {
+                    Response.Write("<script>alert('部门下用户删除完成')</script>");
+                }
+                else
+                {
+                    Response.Write("<script>alert('部门下用户暂无删除项')</script>");
+                }
+            }
+             
+        }
     }
 }

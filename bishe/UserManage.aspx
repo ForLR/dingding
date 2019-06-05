@@ -74,6 +74,8 @@
               <asp:Button ID="Button_student" runat="server" Text="学生" CssClass="Button" OnClick="Button_student_Click"/>
             &nbsp;&nbsp;
               <asp:Button ID="Button_teacher" runat="server" Text="教师" CssClass="Button" OnClick="Button_teacher_Click"/>
+              &nbsp;&nbsp;
+              <asp:Button ID="Button_delete" runat="server" Text="删除" CssClass="Button" OnClick="Button_delete_Click"/>
             
             </div>
     </form>
